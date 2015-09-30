@@ -6,6 +6,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.app.ActivityManager;
+import android.app.ActivityManager.RunningServiceInfo;
+import android.content.Context;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -13,10 +17,27 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        findViewById(R.id.button2).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btnNuevo).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, alarma.class));
+
+            }
+        });
+
+        if (!isServiceRunning()) {
+                //inicio de servicio
+                Intent intent = new Intent(MainActivity.this, Servicio.class);
+                startService(intent);
+        }else{
+            Toast.makeText(this, "Serivicio YA iniciado", Toast.LENGTH_LONG).show();
+        }
+
+        findViewById(R.id.btnGrafica).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Servicio.class);
+                stopService(intent);
             }
         });
     }
@@ -41,5 +62,14 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    private boolean isServiceRunning() {
+        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        for (RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (Servicio.class.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
     }
 }

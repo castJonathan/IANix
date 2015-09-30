@@ -3,10 +3,12 @@
     package="com.jcastillo.ianix" >
 
     <application
+        android:name=".IANix"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name" >
@@ -24,6 +26,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.jcastillo.ianix.MainActivity" />
         </activity>
+        <service
+            android:name=".Servicio"
+            >
+        </service>
     </application>
 
 </manifest>
