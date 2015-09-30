@@ -16,6 +16,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".alarma"
+            android:label="@string/title_activity_alarma"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.jcastillo.ianix.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
