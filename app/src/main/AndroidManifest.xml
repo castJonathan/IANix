@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.jcastillo.ianix" >
-
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <application
         android:name=".IANix"
         android:allowBackup="true"
@@ -24,12 +24,17 @@
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.jcastillo.ianix.MainActivity" />
+                android:value=".MainActivity" />
         </activity>
         <service
             android:name=".Servicio"
             >
         </service>
+        <receiver android:name=".AlarmNotificationReceiver" >
+        </receiver>
+
+        <receiver android:name=".AlarmLoggerReceiver" >
+        </receiver>
     </application>
 
 </manifest>

@@ -62,17 +62,18 @@ public class Servicio extends Service implements SensorEventListener {
                 prevX = curX;
                 prevY = curY;
                 prevZ = curZ;
+                Log.e("lastU",Long.toString(current_time));
             }
 
             long time_difference = current_time - last_update;
             if (time_difference > 0) {
                 float movement = Math.abs((curX + curY + curZ) - (prevX - prevY - prevZ)) / time_difference;
-                int limit = 2000;
+                int limit = 1500;
                 float min_movement = 1E-6f;
-                Log.e("movement", Float.toString(movement));
+                //Log.e("movement", Float.toString(movement));
                 if (movement > min_movement) {
                     if (current_time - last_movement >= limit) {
-                        Toast.makeText(getApplicationContext(), " Servicio Hay movimiento de " + movement, Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(getApplicationContext(), "Hay movimiento de " + movement, Toast.LENGTH_SHORT).show();
                     }
                     last_movement = current_time;
                 }
